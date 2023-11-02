@@ -20,5 +20,6 @@ select mat_num, mat_name from stock where warehouse = "供电局1#仓库" and un
 #（3）查询物资名称中第三、四个字为“绝缘”的物资信息，结果按编号的降序排列
 select * from stock where substr(mat_name, 3, 2) = "绝缘" order by mat_num desc;
 #（4）查询使用了两种及两种以上物资的抢修工程项目号
-select prj_num, count(mat_num) from out_stock where cnt = (select count(mat_num) from out_stock) and cnt > 1 group by prj_num;
+select prj_num from out_stock group by prj_num  having count(mat_num) > 1;
 #（5）查询每个仓库中存放的物资种类数，结果列为仓库号、物资种类数目
+select warehouse, count(warehouse) as cnt from stock group by warehouse having cnt > 0;
