@@ -37,7 +37,19 @@ WHERE BooksType.BTname = "计算机丛书";
 
 
 # 实验二
+USE dlqx;
 # （1）查询同时使用了物资编号为m001和m002的抢修工程的工程号（请用至少两个不同的SELECT语句完成）
+SELECT prj_num, 
+count(if(mat_num = "m001",1,null)) as m1_cnt,
+count(if(mat_num = "m002",1,null)) as m2_cnt
+FROM out_stock 
+GROUP BY prj_num
+having m1_cnt > 0 and m2_cnt > 0;
+
 # （2）查询工程3部曾经领用过哪些物资，列出编号和名称
+SELECT department, mat_num
+FROM out_stock
+WHERE department = "工程3部";
+
 # （3）查询每种物资的编号、名称及被领用次数。
 # （4）查询2011年1月到3月期间按期完成的抢修工程及所领用的物资编号。
