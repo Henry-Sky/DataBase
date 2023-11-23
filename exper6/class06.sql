@@ -13,4 +13,25 @@ set Due_date = date_add(Due_date, interval 10 day)
 where RID = (select RID from Readers where Rname = "王可心");
 
 # （4）读者蒋萧萧要转学了，他的信息需要从数据库中删除，请在数据库中完成所有相关操作，写出相应SQL语句。提示：要用不止一条语句完成
+delete from Borrow where RID in (select RID from Readers where Rname = "蒋萧萧");
+select RID from Readers where Rname = "蒋萧萧";
+delete from Readers where RID = "S4077";
+
+use dlqx;
+#（1）供电局4#仓库更名为“供电局4号仓库”
+SET sql_safe_updates = 0;
+update stock set warehouse = "供电局4号仓库" where warehouse = "供电局4#仓库";
+SET sql_safe_updates = 1;
+
+#（2）添加抢修工程信息：编号20180030的工程“上海大学计算中心光缆抢修”，开始时间2018-9-20，结束时间2018-9-21，按期完成，
+# 领用的物资是m001，领用数量3
+insert into salvaging (prj_num, prj_name, start_date, end_date, prj_status)
+values ("20180030", "上海大学计算中心光缆抢修", date("2018-09-20"), date("2018-09-21"), 1);
+insert into out_stock (prj_num, mat_num, amount, get_date)
+values ("20180030", "m001", 3, date("2018-09-20"));
+
+#（3）现需要从Salvaging表中删除第一条记录，应该怎样才能顺利完成？
+# 按照end_date升序排列的第一条记录 
+select prj_num from salvaging order by end_date asc limit 1;
+delete from salvaging where 1 order by end_date asc limit 1;
 
