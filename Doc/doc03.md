@@ -1,4 +1,4 @@
-## 第三章: SQL语言
+# 第三章: SQL语言
 
 **SQL语言:**
 - 数据定义: CREATE, DROP, ALTER
