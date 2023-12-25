@@ -45,6 +45,6 @@ E-R图示例:
 <div align=center> 
 <img src="./imgs/E-R.png" 
 style="border:3px solid blue"
-width = 60%/>
+width = 70%/>
 <figcaption>E-R</figcaption>
 </div>
